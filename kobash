@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+
+import sys
+import os
+import argparse
+
+import kernel.version as ver
+import kernel.extras.toolkit as tk
+import kernel.extras.shell as sh
+import kernel.presetup as setup
+import kernel.processor as kproc
+import kernel.linux as lin
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-version", action="store_true", help="Print Kernel & Release information.")
+args = parser.parse_args()
+
+if args.version:
+    print("KOBASH " + ver.kobash_version + "\nKernel " + ver.kobash_kernel_release)
+    quit(0)
+
+#KOBASH main
+
+def main(argv):
+    # insert pre-things before terminal init
+    print("info: kobash version " + ver.kobash_version)
+    print("info: running on CPU " + kproc.cpu_architecture)
+    print("info: executed on " + lin.tty())
+    print("data: Windows: " + str(kproc.is_windows))
+
+    setup.pre_setup()
+    tk.load()
+    
+    sh.tmain()
+
+
+if __name__ == "__main__":
+    main(sys.argv)

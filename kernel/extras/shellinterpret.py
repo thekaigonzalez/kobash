@@ -73,7 +73,7 @@ def process(strit: str):
                 if (kp.exists("/usr/share/kobash/" + keys[0])) and kp.isdir("/usr/share/kobash/" + keys[0]):
                     eco.load_module("/usr/share/kobash/" + keys[0], keys[1:])
                 if (kp.exists("bin/" + keys[0] + ".py")):
-                    loadPyFile(keys[0], os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py").Main(keys[1:])
+                    loadPyFile( os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py", os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py").Main(keys[1:])
                 else:
                     if os.system(" ".join(keys)) != 0:
                         print("kobash: there isn't an ecosystem, builtin, or any file with the name, '{}'".format(keys[0]))

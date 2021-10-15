@@ -1,4 +1,4 @@
 import os
 
 def Main(arg):
-    print("help")
+    print("help " + str(arg))

@@ -10,3 +10,5 @@ Kobash is a terminal application which tries to fit in with any other generic te
 You can find extension information [Here](./doc/index.md)
 
 You can find Kernel API module information [here.](./modules/index.md)
+
+You can find Error descriptions and fixes [here.](./errors/index.md)

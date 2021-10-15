@@ -1,6 +1,7 @@
 import os
 import sys
 import pathlib
+import requests
 
 class EcoSystem:
     # name=The name of your ecosystem.

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.10
 
 import sys
 import os
@@ -31,7 +31,7 @@ def main(argv):
     setup.pre_setup()
     tk.load_handler_script()
     
-    
+
     sh.tmain()
 
 

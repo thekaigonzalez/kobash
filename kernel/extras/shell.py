@@ -14,7 +14,8 @@ def tmain():
     while (True):
         try:
             line = kreader.read(Style.BRIGHT + Fore.RED + mask.pure_user() + Style.RESET_ALL + "@" + Style.BRIGHT + Fore.GREEN + cur.WorkingDir() + "$ " + Style.RESET_ALL)
-            interp.process(line)
+            if len(line.strip()) > 0:
+                interp.process(line.strip())
         except KeyboardInterrupt:
             print("logout")
             quit(1)

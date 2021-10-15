@@ -6,7 +6,9 @@ The main shell interpreter
 
 
 import os
+import types
 import kernel.python as mods
+import importlib.util
 import kernel.libc as libc
 import kernel.processor as proc
 import kernel.ecosystem as eco
@@ -14,8 +16,14 @@ import kernel.path as kp
 
 # aliases change the command to the command it's binded to.
 aliases = {
-    'help': 'pygo'
+
 }
+
+def loadPyFile(strPath, name):
+    loader = importlib.machinery.SourceFileLoader(name, strPath)
+    mod = types.ModuleType(loader.name)
+    loader.exec_module(mod)
+    return mod
 
 # process string
 def process(strit: str):
@@ -64,6 +72,8 @@ def process(strit: str):
                     eco.load_module(keys[0], keys[1:])
                 if (kp.exists("/usr/share/kobash/" + keys[0])) and kp.isdir("/usr/share/kobash/" + keys[0]):
                     eco.load_module("/usr/share/kobash/" + keys[0], keys[1:])
+                if (kp.exists("bin/" + keys[0] + ".py")):
+                    loadPyFile(keys[0], os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py").Main(keys[1:])
                 else:
                     if os.system(" ".join(keys)) != 0:
                         print("kobash: there isn't an ecosystem, builtin, or any file with the name, '{}'".format(keys[0]))

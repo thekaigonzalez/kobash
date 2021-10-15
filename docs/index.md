@@ -7,4 +7,6 @@ Kobash is a terminal application which tries to fit in with any other generic te
 
 ## Documentation
 
-You can find extension information [Here]()
+You can find extension information [Here](./doc/index.md)
+
+You can find Kernel API module information [here.](./modules/index.md)

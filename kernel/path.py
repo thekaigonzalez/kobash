@@ -5,3 +5,6 @@ def exists(path):
         return True
     else:
         return False
+
+def isdir(path):
+    return True if pathlib.Path(path).is_dir() else False

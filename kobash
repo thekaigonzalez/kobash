@@ -29,7 +29,8 @@ def main(argv):
     print("data: Windows: " + str(kproc.is_windows))
 
     setup.pre_setup()
-    tk.load()
+    tk.load_handler_script()
+    
     
     sh.tmain()
 

@@ -21,8 +21,11 @@ myeco.Init = MyEvent
 
 '''
 
-def load():
+def load_handler_script():
     if pathlib.Path("handler.py").exists():
         import handler
-        if (handler.startup) != None:
-            handler.startup()
+        try:
+            if (handler.startup) != None:
+                handler.startup()
+        except Exception:
+            pass

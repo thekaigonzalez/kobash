@@ -1,4 +1,5 @@
 import os
 
 def Main(arg):
-    print("help " + str(arg))
+    if arg[1] == "-help":
+        print("help: get documentation using json files.")

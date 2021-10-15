@@ -19,6 +19,14 @@ aliases = {
 
 }
 
+def is_tool(name):
+    """Check whether `name` is on PATH and marked as executable."""
+
+    # from whichcraft import which
+    from shutil import which
+
+    return which(name) is not None
+
 def loadPyFile(strPath, name):
     loader = importlib.machinery.SourceFileLoader(name, strPath)
     mod = types.ModuleType(loader.name)
@@ -75,6 +83,6 @@ def process(strit: str):
                 if (kp.exists("bin/" + keys[0] + ".py")):
                     loadPyFile(os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py", os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py").Main(keys[1:])
                 else:
-                    if os.system(" ".join(keys)) != 0:
+                    if os.system(" ".join(keys)) != 0 and not is_tool(keys[0]):
                         print("kobash: there isn't an ecosystem, builtin, or any file with the name, '{}'".format(keys[0]))
 

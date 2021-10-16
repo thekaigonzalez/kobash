@@ -7,6 +7,7 @@ import argparse
 import kernel.version as ver
 import kernel.extras.toolkit as tk
 import kernel.extras.shell as sh
+from kernel.globalv import GLOB_TRUE
 import kernel.presetup as setup
 import kernel.processor as kproc
 import kernel.linux as lin
@@ -22,14 +23,17 @@ if args.version:
 #KOBASH main
 
 def main(argv):
-    # insert pre-things before terminal init
-    print("info: kobash version " + ver.kobash_version)
-    print("info: running on CPU " + kproc.cpu_architecture)
-    print("info: executed on " + lin.tty())
-    print("data: Windows: " + str(kproc.is_windows))
+    tk.load_handler_script()
+    # if the global true variable hasn't been messed with
+    if GLOB_TRUE:
+        # insert pre-things before terminal init
+        print("info: kobash version " + ver.kobash_version)
+        print("info: running on CPU " + kproc.cpu_architecture)
+        print("info: executed on " + lin.tty())
+        print("data: Windows: " + str(kproc.is_windows))
 
     setup.pre_setup()
-    tk.load_handler_script()
+    
     
 
     sh.tmain()

@@ -70,7 +70,7 @@ def process(strit: str):
                 print("ls: No such file or directory, '" + " ".join(keys[1:]) + "'")
         elif keys[0] == "alias":
             print("added " + keys[0] + " to aliases.")
-            aliases[keys[1]] = "".join(keys[2:])
+            aliases[keys[1]] = " ".join(keys[2:])
             print(aliases)
         elif keys[0] == "clear":
             if proc.is_windows:

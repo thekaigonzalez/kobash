@@ -1,1 +1,6 @@
-kobash 
+kobash official repository
+
+For Unix-Like devices kobash utilizes your default shell if the utility isn't found by default.
+Which means on Ubuntu, Debian, etc. you can get apt in Kobash, without the need for any ports.
+
+It also uses a similar system to KTerminal, therefore the KTerminalPorts (core) Project is available.

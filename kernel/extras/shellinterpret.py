@@ -30,7 +30,10 @@ def is_tool(name):
 def loadPyFile(strPath, name):
     loader = importlib.machinery.SourceFileLoader(name, strPath)
     mod = types.ModuleType(loader.name)
-    loader.exec_module(mod)
+    try:
+        loader.exec_module(mod)
+    except Exception as e:
+        print("error in module :(")
     return mod
 
 # process string
@@ -76,13 +79,28 @@ def process(strit: str):
                 os.system("clear")
         else:
             if (keys[0] != "./") or keys[0] != ".":
-                if (kp.exists(keys[0])) and kp.isdir(keys[0]):
-                    eco.load_module(keys[0], keys[1:])
-                if (kp.exists("/usr/share/kobash/" + keys[0])) and kp.isdir("/usr/share/kobash/" + keys[0]):
-                    eco.load_module("/usr/share/kobash/" + keys[0], keys[1:])
-                if (kp.exists("bin/" + keys[0] + ".py")):
-                    loadPyFile(os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py", os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py").Main(keys[1:])
-                else:
-                    if os.system(" ".join(keys)) != 0 and not is_tool(keys[0]):
-                        print("kobash: there isn't an ecosystem, builtin, or any file with the name, '{}'".format(keys[0]))
+                try:
+                    if (kp.exists(keys[0])) and kp.isdir(keys[0]):
+                        eco.load_module(keys[0], keys[1:])
+                    if (kp.exists("/usr/share/kobash/" + keys[0])) and kp.isdir("/usr/share/kobash/" + keys[0]):
+                        eco.load_module("/usr/share/kobash/" + keys[0], keys[1:])
+                    if (kp.exists("bin/" + keys[0] + ".py")):
+                            fc = loadPyFile(os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py", os.getenv("KOBASH_HOME") + "/bin/" + keys[0] + ".py").Main(keys[1:])
+                            if (fc != 0) and (fc != None):
+                                print(":(")
+                  
+                    else:
+                        if os.system(" ".join(keys)) != 0 and not is_tool(keys[0]):
+                            print("kobash: there isn't an ecosystem, builtin, or any file with the name, '{}'".format(keys[0]))
+                except AttributeError as ae:
+                    print("couldn't find a Main() method. Is this a kobash python file?")
+                    print(str(ae))
+                except TypeError as ye:
+                    print("Main() expected 1 argument. Main(argv)")
+                    print(str(ye))
+                except NameError as ne:
+                    print("Mismatch in naming, please fix.")
+                    print(str(ne))
+                except Exception as e:
+                    print(str(e))      
 
